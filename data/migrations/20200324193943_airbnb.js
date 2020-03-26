@@ -8,19 +8,19 @@ exports.up = async function(knex) {
 	});
 	await knex.schema.createTable('property', (table) => {
 		table.increments();
-		table.text('street').notNull();
+		table.text('address').notNull();
 		table.text('city').notNull();
 		table.text('state').notNull();
 		table.integer('zip').notNull();
 		table.text('description');
-		table.boolean('children-allowed').default(false);
-		table.text('property-type').notNull();
-		table.integer('bedrooms-Number');
-		table.integer('bathrooms-Number');
+		table.boolean('children_allowed').default(false);
+		table.text('property_type').notNull();
+		table.integer('bedrooms_number');
+		table.integer('bathrooms_number');
 		table.text('amenities');
 		table.float('price').notNull();
 		table
-			.integer('user-id')
+			.integer('user_id')
 			.unsigned()
 			.notNull()
 			.references('id')
@@ -31,6 +31,6 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-    await knex.schema.dropTableIfExists('property')
-	await knex.schema.dropTableIfExists('users');
+	await knex.schema.dropTableIfExists('property');
+	await knex.schema.dropTableIfExists('user');
 };
