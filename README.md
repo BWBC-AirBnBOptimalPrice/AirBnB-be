@@ -30,13 +30,13 @@ https://lambda-airbnb.herokuapp.com
 
 ## user End-Points
 
-| Method |       URL         | Description                                         |
-| -------| ------------------| ----------------------------------------------------|
-| get    | /user/            | return all the properties for all the users         |
-| get    | /user/:id         | return all the properties for specific user         |
-| Post   | /user/:id         | require <address,city,state,zip,property_type,price>|
-| put    | /user/:id/:propId | return updated data                                 |
-| delete | /user/:id/:propId | delete the user property                            |
+| Method |       URL         | Description                                               |
+| -------| ------------------| ----------------------------------------------------------|
+| get    | /user/            | return all the properties for all the users               |
+| get    | /user/:id         | return all the properties for specific user               |
+| Post   | /user/:id         | require <address,city,state,zip,property_type,price>      |
+| put    | /user/:id/:propId | return a massage for updating property for specific user  |
+| delete | /user/:id/:propId | delete the property for specific user                     |
 
 
 
