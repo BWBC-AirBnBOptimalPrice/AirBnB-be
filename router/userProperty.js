@@ -5,7 +5,14 @@ const { validateUserId, validatePropertyData, restrict } = require('../middleWar
 
 router.get('/', restrict(), async (req, res, next) => {
 	try {
-		res.json(await db.find());
+		const property = await db.find();
+		const data = property.map((item) => {
+			return {
+				...item,
+				children_allowed: Boolean(item.children_allowed)
+			};
+		});
+		res.json(data);
 	} catch (err) {
 		next(err);
 	}
@@ -13,7 +20,18 @@ router.get('/', restrict(), async (req, res, next) => {
 
 router.get('/:id', restrict(), validateUserId, async (req, res, next) => {
 	try {
-		res.json(await db.findBy(req.params.id));
+		const data = await db.findBy(req.params.id);
+		const properties = data.properties.map((item) => {
+			return {
+				...item,
+				children_allowed: Boolean(item.children_allowed)
+			};
+		});
+		const payload = {
+			...data.user,
+			properties
+		};
+		res.json(payload);
 	} catch (err) {
 		next(err);
 	}
