@@ -13,16 +13,16 @@ async function findBy(id) {
 	};
 }
 
-async function insert(id, property) {
-	return await db('property as p').insert(property).where('p.user_id', id);
+async function insert(property) {
+	return await db('property').insert(property);
 }
 
-async function update(id, propertyId, property) {
-	return await db('property as p', 'p.user_id', id).where('p.id', propertyId).update(property);
+async function update(propertyId, property) {
+	return await db('property as p').where('p.id', propertyId).update(property);
 }
 
-async function Delete(id, propertyId) {
-	return await db('property as p', 'p.user_id', id).where('p.id', propertyId).del();
+async function Delete(propertyId) {
+	return await db('property as p').where('p.id', propertyId).del();
 }
 
 module.exports = {

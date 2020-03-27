@@ -37,21 +37,17 @@ router.get('/:id', restrict(), validateUserId, async (req, res, next) => {
 	}
 });
 
-router.post('/:id', restrict(), validateUserId, validatePropertyData, async (req, res, next) => {
+router.post('/property', restrict(), validateUserId, validatePropertyData, async (req, res, next) => {
 	try {
-		const payload = {
-			...req.body,
-			user_id: req.params.id
-		};
-		res.json(await db.insert(req.params.id, payload));
+		res.json(await db.insert(req.body));
 	} catch (err) {
 		next(err);
 	}
 });
 
-router.put('/:id/:propId', validateUserId, restrict(), async (req, res, next) => {
+router.put('/property/:id', restrict(), validateUserId, async (req, res, next) => {
 	try {
-		const updated = await db.update(req.params.id, req.params.propId, req.body);
+		const updated = await db.update(req.params.id, req.body);
 		if (updated) {
 			res.json({ message: 'This property has successfully updated.' });
 		}
@@ -61,9 +57,9 @@ router.put('/:id/:propId', validateUserId, restrict(), async (req, res, next) =>
 	}
 });
 
-router.delete('/:id/:propId', validateUserId, restrict(), async (req, res, next) => {
+router.delete('/property/:id', restrict(), validateUserId, async (req, res, next) => {
 	try {
-		const deleted = await db.Delete(req.params.id, req.params.propId);
+		const deleted = await db.Delete(req.params.propId);
 		if (deleted) {
 			res.json({ message: 'This property has successfully deleted' });
 		}

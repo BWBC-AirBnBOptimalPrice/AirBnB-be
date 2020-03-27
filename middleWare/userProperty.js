@@ -2,7 +2,7 @@ const db = require('../data/knexConfig');
 const jwt = require('jsonwebtoken');
 
 async function validateUserId(req, res, next) {
-	const user = await db('user').select('user.id').where('user.id', req.params.id).first();
+	const user = await db('user').select('user.id').where('user.id', req.body.user_id).first();
 	if (!user) {
 		res.json({ message: 'This user not exist or has been deleted.' });
 	}
@@ -25,7 +25,7 @@ function restrict() {
 	};
 	return async (req, res, next) => {
 		try {
-			const token = req.cookies.token;
+			const token = req.headers.authorization;
 
 			if (!token) {
 				return res.status(401).json(authError);
@@ -35,7 +35,7 @@ function restrict() {
 				if (err) {
 					return res.status(401).json(authError);
 				}
-
+				req.body.user_id = decoded.userId;
 				next();
 			});
 		} catch (err) {
