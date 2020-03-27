@@ -59,7 +59,7 @@ router.put('/property/:id', restrict(), validateUserId, async (req, res, next) =
 
 router.delete('/property/:id', restrict(), validateUserId, async (req, res, next) => {
 	try {
-		const deleted = await db.Delete(req.params.propId);
+		const deleted = await db.Delete(req.params.id);
 		if (deleted) {
 			res.json({ message: 'This property has successfully deleted' });
 		}
