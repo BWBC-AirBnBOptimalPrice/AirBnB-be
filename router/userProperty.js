@@ -37,7 +37,7 @@ router.get('/:id', restrict(), validateUserId, async (req, res, next) => {
 	}
 });
 
-router.post('/property', restrict(), validateUserId, validatePropertyData, async (req, res, next) => {
+router.post('/property', restrict(), async (req, res, next) => {
 	try {
 		res.json(await db.insert(req.body));
 	} catch (err) {
